@@ -1,24 +1,270 @@
-#  Study Planner
+/* reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-A simple study planner made with HTML, CSS and JavaScript.
-No installs. Just open index.html in your browser.
+/* page base */
+body {
+  /* font-family: Arial, sans-serif; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  color: #222;
+}
 
-## Files
-- index.html  the page.
-- smartstudy.css   all the styles
-- smartstudy.js      all the logic
-- imgs/       put your background image here
-## What it does
-- Add, edit, delete tasks
-- Mark tasks as done
-- Progress bar showing how many tasks are done
-- Pomodoro timer (25 min study, 5 min break)
-- Light and dark mode
-- Everything saves automatically with localStorage
-## Folder layout
-study-planner/
-  index.html
-  smartstudy.css
-  smartstudy.js
-  imgs/
-  README.md
+/* dark mode by JS */
+body.dark {
+  background: #1a1a2e;
+  color: #eee;
+}
+
+/* ---- TOP BAR ---- */
+#topbar {
+  background: #4361ee;
+  color: white;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#topbar h1 {
+  font-size: 20px;
+}
+
+#topbar button {
+  background: white;
+  color: #4361ee;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* ---- HERO IMAGE ---- */
+#heroImg {
+  /* width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+   */
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+
+/* ---- PROGRESS BAR ---- */
+#progressArea {
+  margin: 16px;
+}
+
+#progressArea p {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+#progressBar {
+  background: #ddd;
+  border-radius: 20px;
+  height: 14px;
+  overflow: hidden;
+}
+
+#progressFill {
+  height: 100%;
+  width: 0%;
+  background: #4361ee;
+  border-radius: 20px;
+  /* smooth animation when width changes */
+  transition: width 0.4s;
+}
+
+/* ---- TIMER ---- */
+#timerBox {
+  background: white;
+  margin: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body.dark #timerBox {
+  background: #16213e;
+}
+
+#timerBox h2 {
+  margin-bottom: 6px;
+}
+
+#timerLabel {
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#timerDisplay {
+  font-size: 56px;
+  font-weight: bold;
+  color: #4361ee;
+  margin-bottom: 14px;
+  /* monospace so digits don't jump around */
+  font-family: monospace;
+}
+
+#timerButtons button {
+  margin: 4px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+/* give each timer button   own color */
+#timerButtons button:nth-child(1) { background: #4361ee; }
+#timerButtons button:nth-child(2) { background: orange;  }
+#timerButtons button:nth-child(3) { background: #e63946; }
+
+/* TASK FORM ---- */
+#formBox {
+  background: white;
+  margin: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body.dark #formBox {
+    background: #16213e;
+}
+
+#formBox h2 {
+  margin-bottom: 12px;
+}
+
+/* all inputs and textarea share these styles */
+#formBox input,
+#formBox textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+}
+
+body.dark #formBox input,
+body.dark #formBox textarea {
+  background: #1a1a2e;
+  color: #eee;
+  border-color: #444;
+}
+
+#formBox textarea {
+  height: 70px;
+  resize: none;
+}
+
+#formBox button {
+  width: 100%;
+  padding: 12px;
+  background: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ---- TASK LIST ---- */
+#taskBox {
+  background: white;
+  margin: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+}
+
+body.dark #taskBox {
+  background: #16213e;
+}
+
+#taskBox h2 {
+  margin-bottom: 12px;
+}
+
+#emptyMsg {
+  color: gray;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+}
+
+/* single task card */
+.task {
+  border: 2px solid #eee;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+body.dark .task {
+  border-color: #333;
+}
+
+/* completed task looks faded */
+.task.done {
+  opacity: 0.5;
+}
+
+.task.done .taskTitle {
+  text-decoration: line-through;
+}
+
+.taskTitle {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.taskDesc {
+  font-size: 13px;
+  color: gray;
+  margin-bottom: 4px;
+}
+
+.taskDate {
+  font-size: 12px;
+  color: #e63946;
+  margin-bottom: 8px;
+}
+
+/* task action Button*/
+.task button {
+  margin-right: 6px;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+}
+
+/* mobile responsive */
+@media (max-width: 500px) {
+  #timerDisplay { font-size: 42px; }
+  #topbar h1    { font-size: 17px; }
+  #heroImg { height: 180px; }
+}
