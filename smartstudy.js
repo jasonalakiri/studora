@@ -148,9 +148,14 @@ function updateProgress() {
 }
 
 
-// ================================
+
+
+
+
+
+
 // POMODORO TIMER
-// ================================
+
 
 function updateTimerDisplay() {
   let mins = Math.floor(secondsLeft / 60);
@@ -245,8 +250,8 @@ if (localStorage.getItem('theme') === 'dark') {
 }
 
 //
-// START — runs when page loads
+// START  runs when the page loads...
 // 
 
 showTasks();
-updateTimerDisplay(); // shows saved time, not always 25:00
+updateTimerDisplay(); // shows thesaved time, not always 25:00
