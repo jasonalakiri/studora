@@ -119,10 +119,10 @@ function showTasks() {
       '<div class="taskDesc">'  + t.desc    + '</div>' +
       '<div class="taskDate">📅 Due: ' + t.deadline + '</div>' +
       '<button style="background:#2dc653" onclick="markDone(' + t.id + ')">' +
-        (t.done ? 'Undo' : '✔ Done') +
+        (t.done ? 'Undo' : ' Done') +
       '</button>' +
-      '<button style="background:orange"  onclick="editTask('   + t.id + ')">✏ Edit</button>' +
-      '<button style="background:#e63946" onclick="deleteTask(' + t.id + ')">🗑 Delete</button>';
+      '<button style="background:orange"  onclick="editTask('   + t.id + ')"> Edit</button>' +
+      '<button style="background:#e63946" onclick="deleteTask(' + t.id + ')"> Delete</button>';
 
     list.appendChild(div);
   }
